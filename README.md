@@ -1,6 +1,6 @@
 # Password Generator
 
-A simple password generator with a graphical user interface (GUI) using Python's `tkinter` library.
+A simple password generator with a graphical user interface (GUI) using Python's `Flask` library.
 
 ## Requirements
 
