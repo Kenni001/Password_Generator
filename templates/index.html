@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        label {
+            color: #555;
+        }
+        input[type="range"] {
+            margin-top: 5px;
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+        .range-value {
+            text-align: center;
+            margin-top: 5px;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 2px solid black;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .copy-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        function updateRangeValue(val) {
+            document.getElementById('rangeValue').textContent = val;
+        }
+        function copyPassword() {
+            const passwordText = document.getElementById('passwordText').textContent;
+            navigator.clipboard.writeText(passwordText).then(() => {
+                alert('Password copied to clipboard!');
+            }, () => {
+                alert('Failed to copy password.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="length">Password Length:</label>
+                <input type="range" id="length" name="length" value="10" min="4" max="20" oninput="updateRangeValue(this.value)">
+            </div>
+            <div class="range-value" id="rangeValue">10</div>
+            <div class="form-group">
+                <input type="checkbox" id="upper" name="upper" checked>
+                <label for="upper">Include Uppercase</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="lower" name="lower" checked>
+                <label for="lower">Include Lowercase</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="digits" name="digits" checked>
+                <label for="digits">Include Digits</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="punctuation" name="punctuation" checked>
+                <label for="punctuation">Include Punctuation</label>
+            </div>
+            <button type="submit">Generate Password</button>
+        </form>
+        <div class="result">
+            <h2>Generated Password:</h2>
+            <p id="passwordText">{{ password }}</p>
+            <button class="copy-button" onclick="copyPassword()">Copy Password</button>
+        </div>
+    </div>
+</body>
+</html>
